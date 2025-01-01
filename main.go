@@ -12,8 +12,7 @@ const (
 )
 
 func main() {
-	add := flag.Bool("a", false, "add a new todo")
-	todo := flag.String("t", "", "todo text")
+	add := flag.String("a", "", "add a new todo")
 	complete := flag.Int("c", 0, "mark a todo as completed")
 	del := flag.Int("d", 0, "delete a todo")
 	list := flag.Bool("ls", false, "list all todos")
@@ -28,8 +27,8 @@ func main() {
 	}
 
 	switch {
-	case *add:
-		todos.Add(*todo)
+	case *add != "":
+		todos.Add(*add)
 		err := todos.Store(todoFile)
 		if err != nil {
 			log.Fatal(err.Error())
